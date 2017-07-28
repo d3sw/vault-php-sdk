@@ -8,24 +8,8 @@ use Codific\Vault\OptionsResolver;
  * This service class handle all Vault HTTP API endpoints starting in /auth/token
  *
  */
-class Token
+class Token extends AuthenticationAbstraction
 {
-    /**
-     * Client instance
-     *
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * Create a new Sys service with an optional Client
-     *
-     * @param Client|null $client
-     */
-    public function __construct(Client $client = null)
-    {
-        $this->client = $client ?: new Client();
-    }
 
     /**
      * Creates a new token.
