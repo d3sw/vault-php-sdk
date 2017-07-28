@@ -1,8 +1,8 @@
 <?php
 namespace App\Shell\Task;
 
-use Violuke\Vault\Exception\ServerException;
-use Violuke\Vault\ServiceFactory as VaultFactory;
+use Codific\Vault\Exception\ServerException;
+use Codific\Vault\ServiceFactory as VaultFactory;
 
 /**
  * Vault API and Process Manager
@@ -14,14 +14,14 @@ class VaultTask
     /**
      * Vault API Factory
      *
-     * @var Violuke\Vault\ServiceFactory
+     * @var Codific\Vault\ServiceFactory
      */
     protected $factory;
 
     /**
      * Get the "sys" service from the Vault Factory
      *
-     * @return Violuke\Vault\Services\Sys
+     * @return Codific\Vault\Services\Sys
      */
     public function sys()
     {
@@ -31,7 +31,7 @@ class VaultTask
     /**
      * Get the "data" service from the Vault Factory
      *
-     * @return Violuke\Vault\Services\Data
+     * @return Codific\Vault\Services\Data
      */
     public function data()
     {
@@ -44,7 +44,7 @@ class VaultTask
      * If the ~/.bownty_vault_keys file exist, the X-Vault-Token header
      * will automatically be sent in all requests
      *
-     * @return Violuke\Vault\ServiceFactory
+     * @return Codific\Vault\ServiceFactory
      */
     public function factory()
     {

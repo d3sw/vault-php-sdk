@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Violuke\\Vault\\": "src"
+            "Codific\\Vault\\": "src"
         }
     }
 }

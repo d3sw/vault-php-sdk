@@ -1,5 +1,5 @@
 <?php
-namespace Violuke\Vault\Exception;
+namespace Codific\Vault\Exception;
 
 interface VaultExceptionInterface
 {
