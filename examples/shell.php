@@ -2,7 +2,7 @@
 namespace App\Shell;
 
 use Cake\Utility\Hash;
-use Violuke\Vault\ServiceFactory as VaultFactory;
+use Codific\Vault\ServiceFactory as VaultFactory;
 
 /**
  * Vault shell

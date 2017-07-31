@@ -1,8 +1,8 @@
 <?php
-namespace Violuke\Vault\Services;
+namespace Codific\Vault\Services;
 
-use Violuke\Vault\Client;
-use Violuke\Vault\OptionsResolver;
+use Codific\Vault\Client;
+use Codific\Vault\OptionsResolver;
 
 /**
  * This service class handle all Vault HTTP API endpoints starting in /sys/

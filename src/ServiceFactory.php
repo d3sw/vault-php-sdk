@@ -1,5 +1,5 @@
 <?php
-namespace Violuke\Vault;
+namespace Codific\Vault;
 
 use GuzzleHttp\Client as GuzzleClient;
 use Psr\Log\LoggerInterface;
@@ -7,10 +7,10 @@ use Psr\Log\LoggerInterface;
 class ServiceFactory
 {
     private static $services = [
-        'sys' => 'Violuke\Vault\Services\Sys',
-        'data' => 'Violuke\Vault\Services\Data',
-        'transit' => 'Violuke\Vault\Services\Transit',
-        'auth/token' => 'Violuke\Vault\Services\Auth\Token',
+        'sys' => 'Codific\Vault\Services\Sys',
+        'data' => 'Codific\Vault\Services\Data',
+        'transit' => 'Codific\Vault\Services\Transit',
+        'auth/token' => 'Codific\Vault\Services\Auth\Token',
     ];
 
     private $client;

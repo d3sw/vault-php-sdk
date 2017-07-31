@@ -11,7 +11,7 @@ Installation
 
 This library can be installed with composer:
 
-    composer require violuke/vault-php-sdk
+    composer require codific/vault-php-sdk
 
 Usage
 -----
@@ -19,7 +19,7 @@ Usage
 The simple way to use this SDK, is to instantiate the service factory:
 
 ```
-$sf = new Violuke\Vault\ServiceFactory();
+$sf = new Codific\Vault\ServiceFactory();
 ```
 
 Then, a service could be retrieve from this factory:

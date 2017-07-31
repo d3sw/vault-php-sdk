@@ -1,5 +1,5 @@
 <?php
-namespace Violuke\Vault;
+namespace Codific\Vault;
 
 class OptionsResolver
 {

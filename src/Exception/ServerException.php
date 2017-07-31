@@ -1,5 +1,5 @@
 <?php
-namespace Violuke\Vault\Exception;
+namespace Codific\Vault\Exception;
 use RuntimeException;
 
 class ServerException extends RuntimeException implements VaultExceptionInterface
