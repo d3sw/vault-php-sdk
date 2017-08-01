@@ -21,26 +21,36 @@ class UserPassword extends AuthenticationAbstraction
     public function create(array $body = [])
     {
         $body = OptionsResolver::resolve($body, [
-                'username', 'password', 'policies', 'ttl','max_ttl'
+            'username', 'password', 'policies', 'ttl','max_ttl'
         ]);
-
+        $username = $body['username'];
         $params = [
-                'body' => json_encode($body)
+            'body' => json_encode($body)
         ];
 
-        return $this->client->post('/v1/auth/userpass/users', $params);
+        return $this->client->post('/v1/auth/userpass/users/'.$username, $params);
     }
 
+
     /**
-     * Returns the properties of an existing username.
+     * Update the password for an existing user
      *
-     * @see    https://www.vaultproject.io/docs/auth/userpass.html
-     * @param  string $username
+     * @see      https://www.vaultproject.io/docs/auth/userpass.html
+     * @param array $body
      * @return mixed
+     * @internal param string $username
      */
-    public function lookup($username)
+    public function update(array $body = [])
     {
-        return $this->client->get('/v1/auth/userpass/users/' . $username);
+        $body = OptionsResolver::resolve($body, [
+            'username', 'password'
+        ]);
+        $username = $body['username'];
+        $params = [
+            'body' => json_encode($body)
+        ];
+
+        return $this->client->post('/v1/auth/userpass/users/'.$username, $params);
     }
 
     /**
@@ -54,19 +64,20 @@ class UserPassword extends AuthenticationAbstraction
     {
         return $this->client->delete('/v1/auth/userpass/users/' . $username);
     }
-    
+
     /**
-     * Update the password for an existig user
+     * login with existing user
      *
      * @see    https://www.vaultproject.io/docs/auth/userpass.html
      * @param  string $username
+     * @param  string $password
      * @return mixed
      */
     public function loginUser($username, $password)
     {
-        $parameters = [
+        $params = [
             'body'=> json_encode(["password" => $password])
         ];
-        return $this->client->post('/v1/auth/userpass/login/' . $username , $parameters );
+        return $this->client->post('/v1/auth/userpass/login/' . $username , $params );
     }
 }
