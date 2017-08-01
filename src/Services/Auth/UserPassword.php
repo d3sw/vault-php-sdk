@@ -62,21 +62,11 @@ class UserPassword extends AuthenticationAbstraction
      * @param  string $username
      * @return mixed
      */
-    public function deleteUser($username, $password)
-    {
-        return $this->client->post('/v1/auth/userpass/users/' . $username . "/" . $password);
-    }
-    
-    /**
-     * Update the password for an existig user
-     *
-     * @see    https://www.vaultproject.io/docs/auth/userpass.html
-     * @param  string $username
-     * @return mixed
-     */
     public function loginUser($username, $password)
     {
-        $parameters = [ "passsword" => $password ];
+        $parameters = [
+            'body'=> json_encode(["password" => $password])
+        ];
         return $this->client->post('/v1/auth/userpass/login/' . $username , $parameters );
     }
 }

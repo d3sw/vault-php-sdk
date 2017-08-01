@@ -15,7 +15,7 @@ class AuthenticationAbstraction
      *
      * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
      * Create a new Sys service with an optional Client

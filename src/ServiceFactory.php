@@ -11,6 +11,7 @@ class ServiceFactory
         'data' => 'Codific\Vault\Services\Data',
         'transit' => 'Codific\Vault\Services\Transit',
         'auth/token' => 'Codific\Vault\Services\Auth\Token',
+        'auth/userpass' => 'Codific\Vault\Services\Auth\UserPassword',
     ];
 
     private $client;
