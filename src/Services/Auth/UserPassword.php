@@ -10,7 +10,7 @@ use Codific\Vault\OptionsResolver;
  */
 class UserPassword extends AuthenticationAbstraction
 {
-
+    
     /**
      * Creates a new user with credentials.
      *
@@ -21,17 +21,17 @@ class UserPassword extends AuthenticationAbstraction
     public function create(array $body = [])
     {
         $body = OptionsResolver::resolve($body, [
-            'username', 'password', 'policies', 'ttl','max_ttl'
+                'username', 'password', 'policies', 'ttl','max_ttl'
         ]);
         $username = $body['username'];
         $params = [
-            'body' => json_encode($body)
+                'body' => json_encode($body)
         ];
-
-        return $this->client->post('/v1/auth/userpass/users/'.$username, $params);
+        
+        return $this->client->post('/v1/auth/users/users/'.$username, $params);
     }
-
-
+    
+    
     /**
      * Update the password for an existing user
      *
@@ -43,16 +43,16 @@ class UserPassword extends AuthenticationAbstraction
     public function update(array $body = [])
     {
         $body = OptionsResolver::resolve($body, [
-            'username', 'password'
+                'username', 'password'
         ]);
         $username = $body['username'];
         $params = [
-            'body' => json_encode($body)
+                'body' => json_encode($body)
         ];
-
-        return $this->client->post('/v1/auth/userpass/users/'.$username, $params);
+        
+        return $this->client->post('/v1/auth/users/users/'.$username, $params);
     }
-
+    
     /**
      * Deletes single user from vault based on username
      *
@@ -62,22 +62,23 @@ class UserPassword extends AuthenticationAbstraction
      */
     public function deleteUser($username)
     {
-        return $this->client->delete('/v1/auth/userpass/users/' . $username);
+        return $this->client->delete('/v1/auth/users/users/' . $username);
     }
-
+    
     /**
      * login with existing user
      *
      * @see    https://www.vaultproject.io/docs/auth/userpass.html
+     * @param  string $userRole
      * @param  string $username
      * @param  string $password
      * @return mixed
      */
-    public function loginUser($username, $password)
+    public function loginUser($userRole, $username, $password)
     {
         $params = [
-            'body'=> json_encode(["password" => $password])
+                'body'=> json_encode(["password" => $password])
         ];
-        return $this->client->post('/v1/auth/userpass/login/' . $username , $params );
+        return $this->client->post('/v1/auth/'.$userRole.'/login/' . $username , $params );
     }
 }
