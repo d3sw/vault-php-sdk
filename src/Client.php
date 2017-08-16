@@ -74,6 +74,11 @@ class Client
     {
         return $this->send(new Request('OPTIONS', $url), $options);
     }
+
+    public function listRequest($url, array $options = [])
+    {
+        return $this->send(new Request('LIST', $url), $options);
+    }
     
     public function send(RequestInterface $request, $options = [])
     {
