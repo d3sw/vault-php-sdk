@@ -74,7 +74,7 @@ class Client
     {
         return $this->send(new Request('OPTIONS', $url), $options);
     }
-
+    
     public function listRequest($url, array $options = [])
     {
         return $this->send(new Request('LIST', $url), $options);
@@ -97,7 +97,9 @@ class Client
         
         $this->logger->debug(sprintf("Response:\n%s", (string) $response->getBody()));
         
-        if (400 <= $response->getStatusCode()) {
+        $responseBody = json_decode($response->getBody());
+        
+        if (400 <= $response->getStatusCode() and ( isset($responseBody->errors) and !empty($responseBody->errors) ) ) {
             $message = sprintf('Something went wrong when calling vault (%s - %s).', $response->getStatusCode(), $response->getReasonPhrase());
             
             $this->logger->error($message);
