@@ -472,4 +472,66 @@ class Sys
         return $this->client->get($url);
     }
 
+    /**
+     * Returns information about the progress on creating new root token.
+     *
+     * @see    https://www.vaultproject.io/api/system/generate-root.html#read-root-generation-progress
+     * @return mixed
+     */
+    public function rootStatus()
+    {
+        return $this->client->get('/v1/sys/generate-root/attempt');
+    }
+    
+    /**
+     * Starts a process for creation of a new root token.
+     *
+     * @param string $otpKey key, which will be XORed with the newly generated root token
+     * 
+     * @see    https://www.vaultproject.io/api/system/generate-root.html#start-root-token-generation
+     * @return mixed
+     */
+    public function rootStart($optKey)
+    {
+        $body = OptionsResolver::resolve($optKey, ['otp']);
+        $body = OptionsResolver::required($body, ['otp']);
+        
+        $params = [
+                'body' => json_encode($body)
+        ];
+        
+        return $this->client->put('/v1/sys/generate-root/attempt', $params);
+    }
+    
+    /**
+     * Stops the process of admin token regeneration and resets the attempts number
+     *
+     * @see    https://www.vaultproject.io/api/system/generate-root.html#cancel-root-generation
+     * @return mixed
+     */
+    public function rootCancel()
+    {
+        return $this->client->delete('/v1/sys/generate-root/attempt');
+    }
+    
+    /**
+     * Sends an unsealing key to the vault and espects to recieve a root token 
+     *
+     * @param  array  $body 
+     *
+     * @see    https://www.vaultproject.io/api/system/generate-root.html#provide-key-share-to-generate-root
+     * @return mixed
+     */
+    public function rootSubmitKey($body)
+    {
+        $body = OptionsResolver::resolve($body, ['nonce','key']);
+        $body = OptionsResolver::required($body, ['nonce','key']);
+        
+        $params = [
+                'body' => json_encode($body)
+        ];
+        
+        return $this->client->put('/v1/sys/generate-root/update', $params);
+    }
+
 }
