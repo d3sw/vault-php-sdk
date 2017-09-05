@@ -46,4 +46,8 @@ class Data
         return $this->client->delete('/v1/' . $path);
     }
 
+    public function list($path)
+    {
+        return $this->client->listRequest('/v1/' . $path);
+    }
 }
