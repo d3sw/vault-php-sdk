@@ -15,14 +15,14 @@ class UserPassword extends AuthenticationAbstraction
      * Creates a new user with credentials.
      *
      * @see    https://www.vaultproject.io/api/auth/userpass/index.html#create-update-user
-     * @param array  $body
+     * @param array  $body options := { username | password | policies | ttl | max_ttl | bound_cidrs }
      * @param string $authBackEnd
      * @return mixed
      */
-    public function create(array $body = [], $authBackEnd = 'user')
+    public function create(array $body = [], $authBackEnd = 'userpass')
     {
         $body = OptionsResolver::resolve($body, [
-            'username', 'password', 'policies', 'ttl', 'max_ttl'
+            'username', 'password', 'policies', 'ttl', 'max_ttl', 'bound_cidrs'
         ]);
         $username = $body['username'];
         $params = [
@@ -40,7 +40,7 @@ class UserPassword extends AuthenticationAbstraction
      * @param string $authBackEnd
      * @return mixed
      */
-    public function update($body, $authBackEnd = 'user')
+    public function update($body, $authBackEnd = 'userpass')
     {
         $body = OptionsResolver::resolve($body, [
             'username', 'password'
@@ -60,7 +60,7 @@ class UserPassword extends AuthenticationAbstraction
      * @param string $authBackEnd
      * @return mixed
      */
-    public function readUser($username, $authBackEnd = 'user')
+    public function readUser($username, $authBackEnd = 'userpass')
     {
         return $this->client->get('/v1/auth/' . $authBackEnd . '/users/' . $username);
     }
@@ -73,7 +73,7 @@ class UserPassword extends AuthenticationAbstraction
      * @param string $authBackEnd
      * @return mixed
      */
-    public function deleteUser($username, $authBackEnd = 'user')
+    public function deleteUser($username, $authBackEnd = 'userpass')
     {
         return $this->client->delete('/v1/auth/' . $authBackEnd . '/users/' . $username);
     }
@@ -85,7 +85,7 @@ class UserPassword extends AuthenticationAbstraction
      * @param string $authBackEnd
      * @return mixed
      */
-    public function listUser($authBackEnd = 'user')
+    public function listUser($authBackEnd = 'userpass')
     {
         return $this->client->listRequest('/v1/auth/' . $authBackEnd . '/users');
     }
@@ -98,7 +98,7 @@ class UserPassword extends AuthenticationAbstraction
      * @param string $authBackEnd
      * @return mixed
      */
-    public function login($body, $authBackEnd = 'user')
+    public function login($body, $authBackEnd = 'userpass')
     {
         $body = OptionsResolver::resolve($body, [
             'username', 'password'
